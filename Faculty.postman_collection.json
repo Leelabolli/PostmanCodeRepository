@@ -1,0 +1,1226 @@
+{
+	"info": {
+		"_postman_id": "168e474a-c9af-44df-9fad-5af39bdf31e5",
+		"name": "Faculty",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25178261",
+		"_collection_link": "https://leelalearnteam.postman.co/workspace/WO_DEV_API_Automation~923d2798-fb3f-41c4-9711-9a97a37b40b5/collection/24013634-168e474a-c9af-44df-9fad-5af39bdf31e5?action=share&source=collection_link&creator=25178261"
+	},
+	"item": [
+		{
+			"name": "Create_Batch<Draft_DONTRUN>",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Fac_Auth}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"courseId\": \"63b56365099980d4a68bb900\",\r\n  \"batchName\": \"API_Automation_Batch_Active\",\r\n  \"maxStudentsAllowed\": 2,\r\n  \"deliveryModel\": 1,\r\n  \"startDate\": \"Mon Dec 31 2023 13:06:28 GMT+0530\",\r\n  \"endDate\": \"Tue Dec 31 2024 13:06:28 GMT+0530\",\r\n  \"instituteId\": 73\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_Dev_URL}}api/v1/organizationservice/batches",
+					"host": [
+						"{{Base_Dev_URL}}api"
+					],
+					"path": [
+						"v1",
+						"organizationservice",
+						"batches"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update_Batch",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Fac_Auth}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"courseId\":\"63b56365099980d4a68bb900\",\"batchName\":\"API_Automation_Batch_Active\",\"maxStudentsAllowed\":4,\"deliveryModel\":1,\"startDate\":\"2023-12-31\",\"endDate\":\"2024-12-31\",\"instituteId\":73}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_Dev_URL}}api/v1/organizationservice/batches/360",
+					"host": [
+						"{{Base_Dev_URL}}api"
+					],
+					"path": [
+						"v1",
+						"organizationservice",
+						"batches",
+						"360"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BatchJoin2<Draft_DONTRUN>",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Fac_Auth}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"batchKey\":\"API_-22011-AF53\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_Dev_URL}}api/v1/organizationservice/batches/join",
+					"host": [
+						"{{Base_Dev_URL}}api"
+					],
+					"path": [
+						"v1",
+						"organizationservice",
+						"batches",
+						"join"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add_Batch_RM",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"RM added successfully \", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.successData[0][0].regionalManagerId).to.eql(\"b189880c-8edf-4554-9748-e51ebeb54e8b\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJyekdBUjZCX0dpU21zRFJZT2syczZXOE0xSnlUckpPUGd0bFQwVGZSVGswIn0.eyJleHAiOjE2NjczNTk1NjYsImlhdCI6MTY2NzM1ODk2NiwianRpIjoiMTVmN2QzM2MtOTE5Yy00MjkyLWEzZWEtMzg0Mzk0ODBkN2QyIiwiaXNzIjoiaHR0cDovL3dvLWtleWNsb2FrLXNlcnZpY2U6ODA4MC9hdXRoL3JlYWxtcy93Zi1vcHBvcnR1bml0eSIsImF1ZCI6InJlYWxtLW1hbmFnZW1lbnQiLCJzdWIiOiIyYWM4OWNlZS04YWQ3LTRlMTItODRjOC01NTU4NjQ2YjA5MmIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzZXNzaW9uX3N0YXRlIjoiZjE0MWEzZGYtZGY5MS00YWYxLWExM2EtNDA1MDhjOWRhYTM4IiwiYWNyIjoiMSIsInJlc291cmNlX2FjY2VzcyI6eyJyZWFsbS1tYW5hZ2VtZW50Ijp7InJvbGVzIjpbImltcGVyc29uYXRpb24iXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiJmMTQxYTNkZi1kZjkxLTRhZjEtYTEzYS00MDUwOGM5ZGFhMzgiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJTdXBlciBBZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6InN1cGVyYWRtaW5Ad2ZnbG9iYWwub3JnIiwiZ2l2ZW5fbmFtZSI6IlN1cGVyIiwiZmFtaWx5X25hbWUiOiJBZG1pbiIsImVtYWlsIjoic3VwZXJhZG1pbkB3Zmdsb2JhbC5vcmcifQ.E5Z0NYp745nHustC7dKa3tAV4TYnPBpWHxW6bC0f8Oh2sA6O3CMOoIegCRLdIUlcJzWJ7vHCR3KVf-cZJbfHWYzwn529v2UI0PDpeQhG_doT5dgASVD6ksNJ_9I6n3IR15kAhDEKEEvGZD0hA7diDItjBD5BXYYs1i0eluHspaA1yD4u5WAoEyoMrGcJO3UnupcMK2ttypeyQDbwPltKWH-oe36l5-Q4ZTzqtK8yppYToB6fjCI9HJhQeB5zdBM_T6JMK8TnW0NSr7kYZjS1TF6PoE9Uh3mf9bpBar7solqPfTqwJU7_SuZa9-ZXwboAjLJ3LKW7yaCaTXfLLFnMew",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"regionalManagerId\":\"b189880c-8edf-4554-9748-e51ebeb54e8b\",\"batchIds\":[360]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_Dev_URL}}api/v1/organizationservice/admin/batches/regionalManager",
+					"host": [
+						"{{Base_Dev_URL}}api"
+					],
+					"path": [
+						"v1",
+						"organizationservice",
+						"admin",
+						"batches",
+						"regionalManager"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Batch_Active",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Validate Batch active status in API Response\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.batches[1].batchName).to.eql(\"API_Automation_Batch_Active\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Fac_Auth}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{Base_Dev_URL}}api/v1/organizationservice/users/b8387002-d0ff-4572-a668-9fa007a4b323/batches?status=ACTIVE",
+					"host": [
+						"{{Base_Dev_URL}}api"
+					],
+					"path": [
+						"v1",
+						"organizationservice",
+						"users",
+						"b8387002-d0ff-4572-a668-9fa007a4b323",
+						"batches"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "ACTIVE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Batch_InActive",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Validate Batch inactive status in API Response\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.batches[2].batchName).to.eql(\"API_Automation_Batch_InActive\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Fac_Auth}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{Base_Dev_URL}}api/v1/organizationservice/users/b8387002-d0ff-4572-a668-9fa007a4b323/batches?status=INACTIVE",
+					"host": [
+						"{{Base_Dev_URL}}api"
+					],
+					"path": [
+						"v1",
+						"organizationservice",
+						"users",
+						"b8387002-d0ff-4572-a668-9fa007a4b323",
+						"batches"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "INACTIVE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Batch_Details_BatchName",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Validate Batch active status in API Response\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.batches[0].batchName).to.eql(\"API_Automation_Batch_Active\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Fac_Auth}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{Base_Dev_URL}}api/v2/organizationservice/batches?batchIds=360",
+					"host": [
+						"{{Base_Dev_URL}}api"
+					],
+					"path": [
+						"v2",
+						"organizationservice",
+						"batches"
+					],
+					"query": [
+						{
+							"key": "batchIds",
+							"value": "360"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Batch_Details_CouserName",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Validate Course Name in API Response\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.courses[0].name).to.eql(\"API_Automation_Course_Published\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Fac_Auth}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{Base_Dev_URL}}api/v1/courseservice/courses/latest?courseRootIds=63b56365099980d4a68bb900",
+					"host": [
+						"{{Base_Dev_URL}}api"
+					],
+					"path": [
+						"v1",
+						"courseservice",
+						"courses",
+						"latest"
+					],
+					"query": [
+						{
+							"key": "courseRootIds",
+							"value": "63b56365099980d4a68bb900"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Batch_Details_FacultyName",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Validate Faculty First Name in API Response\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.batchFaculties[1].firstName).to.eql(\"API_Automation\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Fac_Auth}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{Base_Dev_URL}}api/v1/organizationservice/batches/faculties?batchIds=360&search=",
+					"host": [
+						"{{Base_Dev_URL}}api"
+					],
+					"path": [
+						"v1",
+						"organizationservice",
+						"batches",
+						"faculties"
+					],
+					"query": [
+						{
+							"key": "batchIds",
+							"value": "360"
+						},
+						{
+							"key": "search",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Batch_Details_RMName",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Validate RM First Name in API Response\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.batchRms[0].firstName).to.eql(\"API_Automation\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Fac_Auth}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{Base_Dev_URL}}api/v1/organizationservice/batches/RMs?batchIds=360&search=",
+					"host": [
+						"{{Base_Dev_URL}}api"
+					],
+					"path": [
+						"v1",
+						"organizationservice",
+						"batches",
+						"RMs"
+					],
+					"query": [
+						{
+							"key": "batchIds",
+							"value": "360"
+						},
+						{
+							"key": "search",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Batch_Details_StudentName",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Validate Student First Name in API Response\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.batchStudents[0].firstName).to.eql(\"API\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Fac_Auth}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{Base_Dev_URL}}api/v1/organizationservice/batches/students?batchIds=360&search=",
+					"host": [
+						"{{Base_Dev_URL}}api"
+					],
+					"path": [
+						"v1",
+						"organizationservice",
+						"batches",
+						"students"
+					],
+					"query": [
+						{
+							"key": "batchIds",
+							"value": "360"
+						},
+						{
+							"key": "search",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Batch_Details_StudentProfileDetails",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Fac_Auth}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{Base_Dev_URL}}api/v1/profileservice/users?userId=636f15a1-1846-4fbe-823a-fe7f859ad9d7",
+					"host": [
+						"{{Base_Dev_URL}}api"
+					],
+					"path": [
+						"v1",
+						"profileservice",
+						"users"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "636f15a1-1846-4fbe-823a-fe7f859ad9d7"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_MeetingInvite",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"var eventid=jsonData.data._id;\r",
+							"pm.environment.set(\"Fac_EventId\", eventid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Fac_Auth}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"API Automation Meeting Invite\",\r\n    \"description\": \"API Automation Meeting Invite\",\r\n    \"location\": \"\",\r\n    \"start\": {\r\n        \"datetime\": \"2023-01-06T04:30:00.509Z\"\r\n    },\r\n    \"end\": {\r\n        \"datetime\": \"2023-01-06T05:00:00.509Z\"\r\n    },\r\n    \"status\": \"confirmed\",\r\n    \"organizer\": {\r\n        \"userId\": \"b8387002-d0ff-4572-a668-9fa007a4b323\"\r\n    },\r\n    \"attendees\": [\r\n        {\r\n            \"userId\": \"636f15a1-1846-4fbe-823a-fe7f859ad9d7\",\r\n            \"organizer\": false,\r\n            \"email\": \"teststuapiactive@yopmail.com\"\r\n        },\r\n        {\r\n            \"userId\": \"b8387002-d0ff-4572-a668-9fa007a4b323\",\r\n            \"organizer\": true,\r\n            \"email\": \"testfacapiactive@yopmail.com\"\r\n        }\r\n    ],\r\n    \"tags\": {\r\n        \"batch\": \"API_-22011-AF53\"\r\n    },\r\n    \"clientName\": \"WO\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_Dev_URL}}api/v1/organizationservice/events",
+					"host": [
+						"{{Base_Dev_URL}}api"
+					],
+					"path": [
+						"v1",
+						"organizationservice",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Meeting_Details_CalendarPage",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Fac_Auth}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_Dev_URL}}api/v1/users/b8387002-d0ff-4572-a668-9fa007a4b323/notifications?page=1&limit=10",
+					"host": [
+						"{{Base_Dev_URL}}api"
+					],
+					"path": [
+						"v1",
+						"users",
+						"b8387002-d0ff-4572-a668-9fa007a4b323",
+						"notifications"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unread event notifications count",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Fac_Auth}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_Dev_URL}}api/v1/users/b8387002-d0ff-4572-a668-9fa007a4b323/notifications/count",
+					"host": [
+						"{{Base_Dev_URL}}api"
+					],
+					"path": [
+						"v1",
+						"users",
+						"b8387002-d0ff-4572-a668-9fa007a4b323",
+						"notifications",
+						"count"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Total Events list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Total events list\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.notifications[0].metadata.eventName).to.eql(\"API Automation Meeting Invite\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Fac_Auth}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_Dev_URL}}api/v1/users/b8387002-d0ff-4572-a668-9fa007a4b323/notifications?page=1&limit=10",
+					"host": [
+						"{{Base_Dev_URL}}api"
+					],
+					"path": [
+						"v1",
+						"users",
+						"b8387002-d0ff-4572-a668-9fa007a4b323",
+						"notifications"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Faculty_View notifications",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Fac_Auth}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_Dev_URL}}api/v1/users/b8387002-d0ff-4572-a668-9fa007a4b323/notifications/seen",
+					"host": [
+						"{{Base_Dev_URL}}api"
+					],
+					"path": [
+						"v1",
+						"users",
+						"b8387002-d0ff-4572-a668-9fa007a4b323",
+						"notifications",
+						"seen"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Faculty_event details page",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"json1= JSON.parse(responseBody)\r",
+							"console.log(json1.data._id)\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Fac_Auth}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_Dev_URL}}api/v1/organizationservice/events/{{Fac_EventId}}",
+					"host": [
+						"{{Base_Dev_URL}}api"
+					],
+					"path": [
+						"v1",
+						"organizationservice",
+						"events",
+						"{{Fac_EventId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Faculty_Unread chat count",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Fac_Auth}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_Dev_URL}}api/v1/chatservice/users/b8387002-d0ff-4572-a668-9fa007a4b323/conversations/unreadCount",
+					"host": [
+						"{{Base_Dev_URL}}api"
+					],
+					"path": [
+						"v1",
+						"chatservice",
+						"users",
+						"b8387002-d0ff-4572-a668-9fa007a4b323",
+						"conversations",
+						"unreadCount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Faculty_View scorecard",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"FA1 Name is matched successfully...\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data[0].competencyName).to.eql(\"Formative Assessment 1\");\r",
+							"});\r",
+							"pm.test(\"FA1 End date is matched successfully....\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data[0].endDate).to.eql(\"2023-02-21\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Fac_Auth}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_Dev_URL}}api/v1/organizationservice/batches/competency/360",
+					"host": [
+						"{{Base_Dev_URL}}api"
+					],
+					"path": [
+						"v1",
+						"organizationservice",
+						"batches",
+						"competency",
+						"360"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Faculty_View average score",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Quiz name Check \", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data[0].quizName).to.eql(\"Formative Assessment 1\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Fac_Auth}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_Dev_URL}}api/v1/organizationservice/reports/quizzes/course/10/batches?batchIds=360",
+					"host": [
+						"{{Base_Dev_URL}}api"
+					],
+					"path": [
+						"v1",
+						"organizationservice",
+						"reports",
+						"quizzes",
+						"course",
+						"10",
+						"batches"
+					],
+					"query": [
+						{
+							"key": "batchIds",
+							"value": "360"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Faculty_Edit profile",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Mobile number updated successfully \", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.profile.phoneNumber).to.eql(\"9000000298\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Fac_Auth}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstName\": \"API_Automation\",\r\n  \"lastName\": \"Faculty_Active\",\r\n  \"bio\": \"This is test id_Edit\",\r\n  \"linkedInUrl\": \"https://www.linkedin.com/help/linkedin/answer/a507663/linkedin-skill-assessments?lang=en\",\r\n  \"calendlyUrl\": \"https://calendly.com/event_types/user/me\",\r\n  \"location\": {\r\n    \"city\": {\r\n      \"id\": 1,\r\n      \"name\": \"Bangalore\",\r\n      \"displayName\": \"Bangalore, India\"\r\n    }\r\n  },\r\n  \"email\": \"testfacapiactive@yopmail.com\",\r\n  \"preferredLanguage\": \"en\",\r\n  \"countryCode\": \"+91\",\r\n  \"phoneNumber\": \"9000000298\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_Dev_URL}}api/v1/profileservice/users/b8387002-d0ff-4572-a668-9fa007a4b323",
+					"host": [
+						"{{Base_Dev_URL}}api"
+					],
+					"path": [
+						"v1",
+						"profileservice",
+						"users",
+						"b8387002-d0ff-4572-a668-9fa007a4b323"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Faculty_View profile",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\" Faculty Last name  \", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.profile[0].firstName).to.eql(\"API_Automation\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Fac_Auth}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{Base_Dev_URL}}api/v1/profileservice/users?userId=b8387002-d0ff-4572-a668-9fa007a4b323",
+					"host": [
+						"{{Base_Dev_URL}}api"
+					],
+					"path": [
+						"v1",
+						"profileservice",
+						"users"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "b8387002-d0ff-4572-a668-9fa007a4b323"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "Fac_EventId",
+			"value": ""
+		}
+	]
+}
